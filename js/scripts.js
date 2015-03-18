@@ -7,11 +7,16 @@ $(document).ready(function() {
   function getWeather() {
     var callUrl = baseUrl + apiKey + "/" + pdxLat + "," + pdxLong + "?callback=?";
     $.getJSON(callUrl, function(d) {
-      var testTemp = d.hourly.data[0].temperature;
-      console.log();
-    });
+      d.hourly.data.forEach(function(d) {
+        $(".weather").append('<div class="row"><button class="btn btn-default btn-lg">' + d.time.getHours() + ':00 | ' d.temperature + '</button></div>')
+      }); // end each
+    }); // end getJSON
   }
 
   getWeather();
 
 }); // end ready
+
+// TEST
+// var testTemp = parseInt(d.hourly.data[0].temperature);
+// $("#test").html(testTemp);
